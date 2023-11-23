@@ -7,4 +7,4 @@
         
         <circle cx="150" cy="100" r="75" fill="black" />
         
-        <text x="150" y="115" font-size="60" text-anchor="middle" fill="white">AAA</text>
+        <text x="150" y="115" font-size="60" text-anchor="middle" fill="red">SSS</text>

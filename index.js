@@ -1,7 +1,6 @@
-const fs = require('fs');
 const inquirer = require('inquirer');
-const { Triangle, Circle, Square } = require('./lib/shapes.js');
 const whitespaceChecker = require('./lib/whitespacechecker.js');
+const { writeCircle, writeTriangle, writeSquare } = require('./lib/write-file-functions.js');
 
 console.log('Welcome to LogoMaker');
 
@@ -13,9 +12,9 @@ inquirer
             message: 'Please enter your logo characters',
             validate: function (value){
                 if (!value){
-                    return 'Please enter at least one character for your logo'
+                    return 'Please enter at least one character for your logo:'
                 } else if (value.length > 3) {
-                    return 'Please enter no more than three characters for your logo'
+                    return 'Please enter no more than three characters for your logo!'
                 } else {
                     return true;
                 }
@@ -27,9 +26,9 @@ inquirer
             message: 'Please enter a color or hexadecimal code for your logo\'s text',
             validate: function (value) {
                 if (!value) {
-                    return 'Please enter a valid color or hexadecimal code for your logo'
+                    return 'Please enter a valid color or hexadecimal code for your logo:'
                 } else if (whitespaceChecker(value)) {
-                    return 'Please enter a valid color or hexadecimal code for your logo, spaces are not allowed'
+                    return 'Please enter a valid color or hexadecimal code for your logo. Spaces are not allowed!'
                 } else {
                     return true;
                 }
@@ -38,16 +37,16 @@ inquirer
         {
             name: 'shape',
             type: 'list',
-            message: 'Please select a shape for your logo',
+            message: 'Please select a shape for your logo:',
             choices: ['Circle', 'Triangle', 'Square']
         },
         {
             name: 'logocolor',
             type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo',
+            message: 'Please enter a color or hexadecimal code for your logo.',
             validate: function (value) {
                 if (!value) {
-                    return 'Please enter a valid color or hexadecimal code for your logo'
+                    return 'Please enter a valid color or hexadecimal code for your logo!'
                 } else {
                     return true;
                 }
@@ -64,31 +63,13 @@ inquirer
 
         switch (shape) {
             case 'Circle':
-                fs.writeFile('./examples/logo.svg', new Circle(characters, logocolor, textcolor).render(), (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('Generated logo saved to ./examples/logo.svg')}
-                    }
-                );
+                writeCircle(characters, logocolor, textcolor);
                     break;
             case 'Triangle':
-                fs.writeFile('./examples/logo.svg', new Triangle(characters, logocolor, textcolor).render(), (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('Generated logo saved to ./examples/logo.svg')}
-                    }
-                );
+                writeTriangle(characters, logocolor, textcolor);
                     break;
             case 'Square':
-                fs.writeFile('./examples/logo.svg', new Square(characters, logocolor, textcolor).render(), (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('Generated logo saved to ./examples/logo.svg')}
-                    }
-                );
+                writeSquare(characters, logocolor, textcolor);
                 break;
             default:
                 console.log('Please enter a valid shape');
