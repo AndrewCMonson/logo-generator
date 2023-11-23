@@ -1,6 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Triangle, Circle, Square } = require('./lib/shapes.js');
+const whitespaceChecker = require('./lib/whitespacechecker.js');
 
 console.log('Welcome to LogoMaker');
 
@@ -24,9 +25,11 @@ inquirer
             name: 'textcolor',
             type: 'input',
             message: 'Please enter a color or hexadecimal code for your logo\'s text',
-            valdiate: function (value) {
+            validate: function (value) {
                 if (!value) {
-                    return 'Please enter a valid color or hexadecimal code for your logo\'s text'
+                    return 'Please enter a valid color or hexadecimal code for your logo'
+                } else if (whitespaceChecker(value)) {
+                    return 'Please enter a valid color or hexadecimal code for your logo, spaces are not allowed'
                 } else {
                     return true;
                 }
@@ -91,6 +94,5 @@ inquirer
                 console.log('Please enter a valid shape');
                 break;
         }
-    }  
-    )
+    })
     .catch((err) => console.log(err));
