@@ -31,7 +31,7 @@ inquirer
                 } else if (whitespaceChecker(value)) {
                     return 'Please enter a valid color or hexadecimal code for your logo. Spaces are not allowed!'
                 } else if (!colorChecker(value)) {
-                    return 'Please enter a valid color or hexadecimal code for your logo!'
+                    return 'Please enter a valid color or hexadecimal code for your logo! Not a valid color!'
                 } else {
                     return true;
                 }
@@ -47,7 +47,7 @@ inquirer
                 } else if (whitespaceChecker(value)) {
                     return 'Please enter a valid color or hexadecimal code for your logo. Spaces are not allowed!'
                 } else if (!colorChecker(value)) {
-                    return 'Please enter a valid color or hexadecimal code for your logo!'
+                    return 'Please enter a valid color or hexadecimal code for your logo! Not a valid color!'
                 } else {
                     return true;
                 }
