@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const whitespaceChecker = require('./lib/whitespacechecker.js');
 const { writeCircle, writeTriangle, writeSquare } = require('./lib/write-file-functions.js');
+const colorChecker = require('./lib/colorchecker.js');
 
 console.log('Welcome to LogoMaker');
 
@@ -29,6 +30,24 @@ inquirer
                     return 'Please enter a valid color or hexadecimal code for your logo:'
                 } else if (whitespaceChecker(value)) {
                     return 'Please enter a valid color or hexadecimal code for your logo. Spaces are not allowed!'
+                } else if (!colorChecker(value)) {
+                    return 'Please enter a valid color or hexadecimal code for your logo!'
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            name: 'logocolor',
+            type: 'input',
+            message: 'Please enter a color or hexadecimal code for your logo:',
+            validate: function (value) {
+                if (!value) {
+                    return 'Please enter a valid color or hexadecimal code for your logo!'
+                } else if (whitespaceChecker(value)) {
+                    return 'Please enter a valid color or hexadecimal code for your logo. Spaces are not allowed!'
+                } else if (!colorChecker(value)) {
+                    return 'Please enter a valid color or hexadecimal code for your logo!'
                 } else {
                     return true;
                 }
@@ -40,18 +59,6 @@ inquirer
             message: 'Please select a shape for your logo:',
             choices: ['Circle', 'Triangle', 'Square']
         },
-        {
-            name: 'logocolor',
-            type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo:',
-            validate: function (value) {
-                if (!value) {
-                    return 'Please enter a valid color or hexadecimal code for your logo!'
-                } else {
-                    return true;
-                }
-            }
-        }
 
     ])
     
