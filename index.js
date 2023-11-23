@@ -1,8 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const Square = require('./lib/shapes.js');
-const Triangle = require('./lib/shapes.js');
-const Circle = require('./lib/shapes.js');
+const { Triangle, Circle, Square } = require('./lib/shapes.js');
 
 console.log('Welcome to LogoMaker');
 
@@ -11,12 +9,28 @@ inquirer
         {
             name: 'characters',
             type: 'input',
-            message: 'Please enter your logo characters'
+            message: 'Please enter your logo characters',
+            validate: function (value){
+                if (!value){
+                    return 'Please enter at least one character for your logo'
+                } else if (value.length > 3) {
+                    return 'Please enter no more than three characters for your logo'
+                } else {
+                    return true;
+                }
+            }
         },
         {
             name: 'textcolor',
             type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo\'s text'
+            message: 'Please enter a color or hexadecimal code for your logo\'s text',
+            valdiate: function (value) {
+                if (!value) {
+                    return 'Please enter a valid color or hexadecimal code for your logo\'s text'
+                } else {
+                    return true;
+                }
+            }
         },
         {
             name: 'shape',
@@ -27,23 +41,56 @@ inquirer
         {
             name: 'logocolor',
             type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo'
+            message: 'Please enter a color or hexadecimal code for your logo',
+            validate: function (value) {
+                if (!value) {
+                    return 'Please enter a valid color or hexadecimal code for your logo'
+                } else {
+                    return true;
+                }
+            }
         }
 
     ])
-    // TODO: write logic to determine which shape is selected and create a new object based on that selection.
-    .then((response) => (fs.writeFile('./examples/output.svg', new Square(response.characters, response.textcolor, response.logocolor).render(), (err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('The file has been saved!');
-        }
-    })));
+    
+    .then((response) => {
+        const shape = response.shape;
+        const characters = response.characters.toUpperCase();
+        const textcolor = response.textcolor;
+        const logocolor = response.logocolor;
 
-// fs.writeFile('./examples/output.svg', new Square('ACM', 'blue', 'black').render(), (err) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log('The file has been saved!');
-//     }
-// });
+        switch (shape) {
+            case 'Circle':
+                fs.writeFile('./examples/logo.svg', new Circle(characters, logocolor, textcolor).render(), (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Generated logo saved to ./examples/logo.svg')}
+                    }
+                );
+                    break;
+            case 'Triangle':
+                fs.writeFile('./examples/logo.svg', new Triangle(characters, logocolor, textcolor).render(), (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Generated logo saved to ./examples/logo.svg')}
+                    }
+                );
+                    break;
+            case 'Square':
+                fs.writeFile('./examples/logo.svg', new Square(characters, logocolor, textcolor).render(), (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Generated logo saved to ./examples/logo.svg')}
+                    }
+                );
+                break;
+            default:
+                console.log('Please enter a valid shape');
+                break;
+        }
+    }  
+    )
+    .catch((err) => console.log(err));
