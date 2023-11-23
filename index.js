@@ -1,6 +1,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const Square = require('./lib/shapes.js');
+const Triangle = require('./lib/shapes.js');
+const Circle = require('./lib/shapes.js');
 
 console.log('Welcome to LogoMaker');
 
@@ -29,6 +31,7 @@ inquirer
         }
 
     ])
+    // TODO: write logic to determine which shape is selected and create a new object based on that selection.
     .then((response) => (fs.writeFile('./examples/output.svg', new Square(response.characters, response.textcolor, response.logocolor).render(), (err) => {
         if (err) {
             console.log(err);
