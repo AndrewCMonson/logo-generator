@@ -9,10 +9,10 @@ inquirer
         {
             name: 'characters',
             type: 'input',
-            message: 'Please enter your logo characters',
+            message: 'Please enter your logo characters:',
             validate: function (value){
                 if (!value){
-                    return 'Please enter at least one character for your logo:'
+                    return 'Please enter at least one character for your logo!'
                 } else if (value.length > 3) {
                     return 'Please enter no more than three characters for your logo!'
                 } else {
@@ -23,7 +23,7 @@ inquirer
         {
             name: 'textcolor',
             type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo\'s text',
+            message: 'Please enter a color or hexadecimal code for your logo\'s text:',
             validate: function (value) {
                 if (!value) {
                     return 'Please enter a valid color or hexadecimal code for your logo:'
@@ -43,7 +43,7 @@ inquirer
         {
             name: 'logocolor',
             type: 'input',
-            message: 'Please enter a color or hexadecimal code for your logo.',
+            message: 'Please enter a color or hexadecimal code for your logo:',
             validate: function (value) {
                 if (!value) {
                     return 'Please enter a valid color or hexadecimal code for your logo!'
