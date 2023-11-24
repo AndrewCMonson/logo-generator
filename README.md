@@ -23,7 +23,7 @@ Clone the repo onto your local machine.
 Ensure you have node.js installed prior to running this application. Open your integrated terminal and run ```node index.js```. You will be greeted with prompts that will require answers. Follow the prompts to generate your logo.
 
 ## Video Walkthrough
-Click [here](https://drive.google.com/file/d/1jEK3hOVTVCMWu7i2laCGn0FZ_Z0YTaBE/view) to view a video walkthrough.
+Click [here](https://drive.google.com/file/d/1LFRDzlxpvH2NOFm4f0_QcT8JwX0ozFsr/view) to view a video walkthrough.
 
 ## Contributing Guidelines
 Fork the repo as you'd like and make any changes. If you'd like your changes included in the source code, please use my email below to contact me.
